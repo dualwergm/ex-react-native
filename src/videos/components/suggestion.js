@@ -15,4 +15,16 @@ function Suggestion(props){
     )
 }
 
+const styles = StyleSheet.create({
+    container: {
+
+    },
+    left: {
+
+    },
+    cover: {
+        
+    }
+});
+
 export default Suggestion;
