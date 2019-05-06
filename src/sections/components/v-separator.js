@@ -6,10 +6,9 @@ function VSeparator(props){
         <View style={[
             styles.container,
             {
-                borderTopColor: (props.btColor) ? props.btColor : '#eaeaea'
+                borderTopColor: props.btColor || '#eaeaea'
             }
         ]}>
-            <Text>Esto es un separador vert.</Text>
         </View>
     );
 }

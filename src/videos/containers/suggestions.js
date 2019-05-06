@@ -10,30 +10,22 @@ import VSeparator from '../../sections/components/v-separator'
 class Suggestions extends Component {
     renderEmpty = () => <Empty text="There are not suggestions ):" />
     renderItemSeparator = () => <VSeparator btColor="red" />
-
+    renderItem = ({item}) => {
+        return (
+            <Suggestion {...item} />
+        );
+    }
+    keyExtractor = item => `${item.id}`
     render(){
-        const list = [
-            {
-                title: 'Avengers',
-                key: '1'
-            },
-            {
-                title: 'Mario Bross',
-                key: '2'
-            },
-            {
-                title: 'Dragon balls',
-                key: '3'
-            }
-        ];
         return(
             <SuggestionLayout 
                 title="Recomendado para tí" >
                 <FlatList 
-                    data={list}
+                    keyExtractor={this.keyExtractor}
+                    data={this.props.list}
                     ListEmptyComponent={this.renderEmpty}
                     ItemSeparatorComponent={this.renderItemSeparator}
-                    renderItem={({item})=> <Text>{item.title}</Text>}
+                    renderItem={this.renderItem}
                 />
             </SuggestionLayout>
 
