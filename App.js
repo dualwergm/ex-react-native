@@ -7,13 +7,13 @@
  */
 
 import React, {Component} from 'react';
-import {Text} from 'react-native';
+import {View,Text} from 'react-native';
 import Home from './src/screens/containers/home';
 import Header from './src/sections/components/header';
 import Suggestions from './src/videos/containers/suggestions';
 import Categories from './src/videos/containers/categories';
 import API from './utils/api';
-
+import Player from './src/players/containers/player';
 type Props = {};
 export default class App extends Component<Props> {
   state = {
@@ -34,6 +34,7 @@ export default class App extends Component<Props> {
     return (
       <Home>
         <Header />
+        <Player />
         <Text>Searcher</Text>
         <Categories 
           list={this.state.categories}
