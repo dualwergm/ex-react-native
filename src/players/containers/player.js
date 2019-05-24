@@ -4,9 +4,13 @@ import {Text, StyleSheet, ActivityIndicator} from 'react-native';
 import VideoLayout from '../components/video-layout';
 import ControlLayout from '../components/control-layout';
 import PlayPause from '../components/play-pause';
+import Fullscreen from '../components/fullscreen';
+
 class Player extends Component{
     state = {
-        loading: true
+        loading: true,
+        paused: false,
+        fullscreen: false
     }
     onBuffer = ({isBuffering}) => {
         this.setState({
@@ -14,7 +18,14 @@ class Player extends Component{
         });
     }
     playPause = () => {
-
+        this.setState({
+            paused: !this.state.paused
+        });
+    }
+    fullscreen = () =>{
+        this.setState({
+            fullscreen: !this.state.fullscreen
+        });
     }
     render(){
        return(
@@ -22,10 +33,11 @@ class Player extends Component{
             loading={this.state.loading}
             video={
                 <Video
-                source={{uri: 'http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4'}}
-                resizeMode='contain'
-                style={styles.video}
-                onBuffer={this.onBuffer}
+                    source={{uri: 'http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4'}}
+                    resizeMode={this.state.fullscreen ? 'contain' : 'cover'}
+                    style={styles.video}
+                    onBuffer={this.onBuffer}
+                    paused={this.state.paused}
                 /> 
             }
             loader={
@@ -35,10 +47,14 @@ class Player extends Component{
                 <ControlLayout>
                   <PlayPause 
                     onPress={this.playPause}
+                    paused={this.state.paused}
                   />
                   <Text>Progress bar</Text>
                   <Text>Time left</Text>
-                  <Text>Full screen</Text>
+                  <Fullscreen 
+                    fullscreen={this.state.fullscreen}
+                    onPress={this.fullscreen}
+                  />
                 </ControlLayout>
             }
             >

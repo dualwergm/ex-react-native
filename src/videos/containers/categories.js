@@ -4,6 +4,13 @@ import Category from '../components/category';
 import Empty from '../../sections/components/empty';
 import HSeparator from '../../sections/components/h-separator';
 import LayoutCategory from '../components/categories-layout';
+import { connect } from 'react-redux';
+
+function mapStateToProps(state){
+    return {
+        list: state.categories
+    };
+}
 
 class Categories extends Component {
     keyExtractor = item => `${item.id}`;
@@ -31,4 +38,4 @@ class Categories extends Component {
     };
 }
 
-export default Categories;
+export default connect(mapStateToProps)(Categories);

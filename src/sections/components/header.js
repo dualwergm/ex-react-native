@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     container: {
-        backgroundColor: 'red',
         paddingVertical: 10,
         paddingHorizontal: 10,
         flexDirection: 'row'

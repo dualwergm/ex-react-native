@@ -7,42 +7,29 @@
  */
 
 import React, {Component} from 'react';
-import {View,Text} from 'react-native';
-import Home from './src/screens/containers/home';
-import Header from './src/sections/components/header';
-import Suggestions from './src/videos/containers/suggestions';
-import Categories from './src/videos/containers/categories';
-import API from './utils/api';
-import Player from './src/players/containers/player';
+import Loading from './src/sections/components/loading';
+import { Provider } from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
+import {store, persistor} from './store';
+import AppLayout from './src/app-layout';
 type Props = {};
 export default class App extends Component<Props> {
   state = {
-    suggestions: [],
-    categories: []
-  }
-  async componentDidMount(){
-    const movies = await API.getSuggestion(10);
-    const categories = await API.getMovies();
-    console.log(movies);
-    console.log(categories);
-    this.setState({
-      suggestions: movies,
-      categories
-    });
+    // suggestions: [],
+    // categories: []
   }
   render() {
     return (
-      <Home>
-        <Header />
-        <Player />
-        <Text>Searcher</Text>
-        <Categories 
-          list={this.state.categories}
-        />
-        <Suggestions 
-          list={this.state.suggestions}
-        />
-      </Home>
+      <Provider
+        store={store}
+      >
+        <PersistGate
+          loading={<Loading />}
+          persistor={persistor}
+        >
+          <AppLayout />  
+        </PersistGate>
+      </Provider>
     );
   }
 }
